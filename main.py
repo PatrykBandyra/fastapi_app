@@ -31,32 +31,32 @@ def counter():
 
 @app.get('/', status_code=200)
 def root():
-    return {'message': 'Hello World'}
+    return json.dumps({'message': 'Hello World!'})
 
 
 @app.get('/method', status_code=200)
 def return_method_get():
-    return {'method': 'GET'}
+    return json.dumps({'method': 'GET'})
 
 
 @app.post('/method', status_code=201)
 def return_method_post():
-    return {'method': 'POST'}
+    return json.dumps({'method': 'POST'})
 
 
 @app.delete('/method', status_code=200)
 def return_method_delete():
-    return {'method': 'DELETE'}
+    return json.dumps({'method': 'DELETE'})
 
 
 @app.put('/method', status_code=200)
 def return_method_put():
-    return {"method": "PUT"}
+    return json.dumps({"method": "PUT"})
 
 
 @app.options('/method', status_code=200)
 def return_method_options():
-    return {'method': 'OPTIONS'}
+    return json.dumps({'method': 'OPTIONS'})
 
 
 @app.get('/auth/')
