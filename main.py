@@ -4,9 +4,15 @@ app = FastAPI()
 app.counter = 0
 
 
-@app.get('/')
+@app.get('/', status_code=200)
 def root():
     return {'message': 'Hello World'}
+
+
+@app.get('/method')
+def return_request_method():
+    pass
+
 
 
 @app.get('/hello/{name}')
