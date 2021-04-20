@@ -11,7 +11,7 @@ def root():
 
 @app.get('/method', status_code=200)
 def return_method_get():
-    return {'method': 'GET'}
+    return {"method": "GET"}
 
 
 @app.post('/method', status_code=201)
