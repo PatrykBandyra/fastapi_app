@@ -84,7 +84,7 @@ async def register_patient(patient: PatientRegistration, response: Response):
     }
     app.registered[app.patient_id] = return_val
     app.patient_id += 1
-    return json.dumps(return_val)
+    return return_val
 
 
 @app.get('/patient/{id}')
@@ -97,7 +97,7 @@ async def get_patient_info(id: int, response: Response):
             response.status_code = 404
     else:
         response.status_code = 200
-        return json.dumps(patient_info)
+        return patient_info
 
 
 
