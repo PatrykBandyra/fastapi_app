@@ -60,7 +60,9 @@ def return_method_options():
 
 @app.get('/auth/')
 async def authorize(password: str, password_hash: str, response: Response):
-    if hashlib.sha512(bytes(password, encoding='utf-8')).hexdigest() == password_hash:
+    if password is None or password == '' or password_hash is None or password_hash == '':
+        response.status_code = 401
+    elif hashlib.sha512(bytes(password, encoding='utf-8')).hexdigest() == password_hash:
         response.status_code = 204
     else:
         response.status_code = 401
