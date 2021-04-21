@@ -35,27 +35,27 @@ def root():
 
 @app.get('/method', status_code=200)
 def return_method_get():
-    return json.dumps({'method': 'GET'})
+    return {'method': 'GET'}
 
 
 @app.post('/method', status_code=201)
 def return_method_post():
-    return json.dumps({'method': 'POST'})
+    return {'method': 'POST'}
 
 
 @app.delete('/method', status_code=200)
 def return_method_delete():
-    return json.dumps({'method': 'DELETE'})
+    return {'method': 'DELETE'}
 
 
 @app.put('/method', status_code=200)
 def return_method_put():
-    return json.dumps({"method": "PUT"})
+    return {"method": "PUT"}
 
 
 @app.options('/method', status_code=200)
 def return_method_options():
-    return json.dumps({'method': 'OPTIONS'})
+    return {'method': 'OPTIONS'}
 
 
 @app.get('/auth/')
