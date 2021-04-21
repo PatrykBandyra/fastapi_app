@@ -30,7 +30,7 @@ def counter():
 
 @app.get('/', status_code=200)
 def root():
-    return {'message': 'Hello World!'}
+    return {'message': 'Hello world!'}
 
 
 @app.get('/method', status_code=200)
