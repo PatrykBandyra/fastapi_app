@@ -168,3 +168,7 @@ def test_patient_by_id_wrong2():
     id = -2
     response = client.get(f'/patient/{id}')
     assert response.status_code == 400
+
+
+def test_a():
+    print((datetime.today() + timedelta()).strftime('%Y-%m-%d'))
