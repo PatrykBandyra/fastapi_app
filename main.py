@@ -1,7 +1,7 @@
 import json
 import random
 
-from fastapi import FastAPI, Response, Depends
+from fastapi import FastAPI, Response, Depends, Cookie
 from fastapi.responses import HTMLResponse
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 import hashlib
@@ -119,16 +119,23 @@ security = HTTPBasic()
 
 
 @app.post('/login_session', status_code=201)
-def login_session_view(credentials: HTTPBasicCredentials = Depends(security)):
-    pass
-
-
-@app.post('/login_token', status_code=201)
-def login_token_view( response: Response, credentials: HTTPBasicCredentials = Depends(security)):
+def login_session_view(response: Response, credentials: HTTPBasicCredentials = Depends(security)):
     correct_username = secrets.compare_digest(credentials.username, '4dm1n')
     correct_password = secrets.compare_digest(credentials.password, 'NotSoSecurePa$$')
     if not (correct_username and correct_password):
-        response.status_code = 400
+        response.status_code = 401
+    else:
+        token_value = random.randint(1, 100)
+        app.login_session_key = token_value
+        response.set_cookie(key="session_token", value=str(token_value))
+
+
+@app.post('/login_token', status_code=201)
+def login_token_view(response: Response, credentials: HTTPBasicCredentials = Depends(security)):
+    correct_username = secrets.compare_digest(credentials.username, '4dm1n')
+    correct_password = secrets.compare_digest(credentials.password, 'NotSoSecurePa$$')
+    if not (correct_username and correct_password):
+        response.status_code = 401
     else:
         token_value = random.randint(1, 100)
         app.login_token_key = token_value
