@@ -14,9 +14,7 @@ app.registered = {}
 """----------------------------------------------------Course--------------------------------------------------------"""
 
 
-@app.get('/hello/{name}')
-def hello_name_view(name: str):
-    return f'Hello {name}'
+
 
 
 @app.get('/counter')
@@ -100,6 +98,13 @@ async def get_patient_info(id: int, response: Response):
     else:
         response.status_code = 200
         return patient_info
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+@app.get('/hello')
+def hello_view(name: str):
+    return f"<h1>Hello! Today date is {datetime.today().strftime('%Y-%m-%d')}</h1>"
 
 
 
