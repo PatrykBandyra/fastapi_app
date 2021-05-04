@@ -103,7 +103,7 @@ async def get_patient_info(id: int, response: Response):
 # ----------------------------------------------------------------------------------------------------------------------
 
 @app.get('/hello')
-def hello_view(name: str):
+def hello_view():
     return f"<h1>Hello! Today date is {datetime.today().strftime('%Y-%m-%d')}</h1>"
 
 
