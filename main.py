@@ -128,7 +128,7 @@ def login_token_view( response: Response, credentials: HTTPBasicCredentials = De
     correct_username = secrets.compare_digest(credentials.username, '4dm1n')
     correct_password = secrets.compare_digest(credentials.password, 'NotSoSecurePa$$')
     if not (correct_username and correct_password):
-        response.status_code = 401
+        response.status_code = 400
     else:
         token_value = random.randint(1, 100)
         app.login_token_key = token_value
