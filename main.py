@@ -1,9 +1,11 @@
 import json
 
 from fastapi import FastAPI, Response
+from fastapi.responses import HTMLResponse
 import hashlib
 from pydantic import BaseModel
 from datetime import datetime, timedelta
+
 
 app = FastAPI()
 app.counter = 0
@@ -102,7 +104,7 @@ async def get_patient_info(id: int, response: Response):
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-@app.get('/hello')
+@app.get('/hello', response_class=HTMLResponse)
 def hello_view():
     return f"<h1>Hello! Today date is {datetime.today().strftime('%Y-%m-%d')}</h1>"
 
