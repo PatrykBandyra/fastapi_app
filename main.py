@@ -1,8 +1,11 @@
 import json
+import random
 
-from fastapi import FastAPI, Response
+from fastapi import FastAPI, Response, Depends
 from fastapi.responses import HTMLResponse
+from fastapi.security import HTTPBasic, HTTPBasicCredentials
 import hashlib
+import secrets
 from pydantic import BaseModel
 from datetime import datetime, timedelta
 
@@ -11,6 +14,9 @@ app = FastAPI()
 app.counter = 0
 app.patient_id = 1
 app.registered = {}
+
+app.login_token_key = 0
+app.login_session_key = 0
 
 
 """----------------------------------------------------Course--------------------------------------------------------"""
@@ -109,6 +115,24 @@ def hello_view():
     return f"<h1>Hello! Today date is {datetime.today().strftime('%Y-%m-%d')}</h1>"
 
 
+security = HTTPBasic()
+
+
+@app.post('/login_session', status_code=201)
+def login_session_view(credentials: HTTPBasicCredentials = Depends(security)):
+    pass
+
+
+@app.post('/login_token', status_code=201)
+def login_token_view( response: Response, credentials: HTTPBasicCredentials = Depends(security)):
+    correct_username = secrets.compare_digest(credentials.username, '4dm1n')
+    correct_password = secrets.compare_digest(credentials.password, 'NotSoSecurePa$$')
+    if not (correct_username and correct_password):
+        response.status_code = 401
+    else:
+        token_value = random.randint(1, 100)
+        app.login_token_key = token_value
+        return {"token": token_value}
 
 
 
